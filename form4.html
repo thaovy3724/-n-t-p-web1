@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 onclick="show()" id="mytext"> Hide register form </h2>
+    <form id="my form">
+        number1 <input type="text" id="t1"><br>
+        number2 <input type="text" id="t2"><br>
+        total <input type="text" id="t"><br>
+        <input type="button" value="submit" onclick="checkForm()">
+    </form>
+    <script>
+        function checkForm(){
+            var num1 = document.getElementById("t1").value; //return value of input and then assign to num1, not  a "value variable"
+            var num2 = document.getElementById("t2").value;
+            var total = document.getElementById("t");
+
+            if(isNaN(num1) || isNaN(num2)){
+                alert("vui long dien so");
+            }
+           // else if(num1>=0 && num<=10) alert("duyet");
+            //else alert("nhap tu 0-10")
+            else{
+                
+                total.value = parseInt(num1)+parseInt(num2);
+                //var tong = num1+num2;
+                //document.getElementById("t").value=tong;
+            }
+        }
+    </script>
+</body>
+</html>

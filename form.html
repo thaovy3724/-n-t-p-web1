@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    function validationForm(){
+        //let hoten = document.frmPhieudatphong.txtHoten;
+        let hoten = document.getElementById("fullname"); //cach 1
+        let cmnd = document.getElementsByName("txtcmnd")[0]; //cach 2
+        if(hoten.value==""){
+            alert("Họ tên không được rỗng");
+            hoten.focus();
+            return false;
+        }
+        else if(cmnd.value==""){
+            alert("CMND không được rỗng");
+            cmnd.focus();
+            return false;
+        }
+        else if(isNaN(cmnd.value)){
+            alert("CMND phải là số");
+            cmnd.focus();
+            return false;
+        }
+    }
+
+    function tinhdongia(){
+        let ngaythue = document.getElementById("ngayThue").value;
+        let ngaytra = document.getElementById("ngayTra").value;
+        const day1 = new Date(ngaythue);
+        const day2 = new Date(ngaytra);
+        var days; //const k xuat kq, let va var dung duoc
+        var tien;
+        if(ngaytra<ngaythue)
+            alert("ngay tra phai sau ngay thue");
+        else if(!ngaythue || !ngaytra || ngaythue==ngaytra){
+            days=1;
+        }
+        else{
+            const time = Math.abs(day2-day1);
+            days = Math.ceil(time/(1000*60*60*24));
+        }
+            var mucgia = document.getElementById("mucgia").value;
+            var ansang = document.getElementById("ansang");
+            var giatui = document.getElementById("giatui");
+            var bao = document.getElementById("baobuoisang");
+            var giaphong;
+           if(mucgia=="a") giaphong=150000;
+           else if(mucgia=="b") giaphong=300000;
+           else giaphong=500000;
+           
+            var count = 0;
+            if(ansang.checked && mucgia=="a") count++;
+            if(giatui.checked) count++;
+            if(bao.checked) count++;
+            tien = giaphong+giaphong*count*5/100;
+       document.getElementById("tienthuephong").value=days*tien;
+    }
+
+    function myFunction(){
+        var ansang = document.getElementById("ansang");
+        if(this.value!="a") ansang.checked=true;
+    }
+</script>
+<body>
+    <form name="frmPhieudatphong" onsubmit="return validationForm()">
+        <h1>phiếu đặt phòng</h1>
+        <label for="fullname">Họ tên *</label><br>
+        <input type="text" name="txtHoten" id="fullname"><br>
+        <label for="address">Địa chỉ</label><br>
+        <input type="text" name="txtDiachi" id="address"><br>
+        <label for="cmnd">Số chứng minh nhân dân *</label><br>
+        <input type="text" name="txtcmnd" id="cmnd"><br>
+        <label for="mucgia">Mức giá</label><br>
+        <select name="cboMucgia" id="mucgia" onchange="myFunction()"><br>
+            <option value="a" selected>loại thường</option>
+            <option value="b">loại sang trọng</option>
+            <option value="c">loại đặc biệt</option>
+        </select><br>
+        <label for="ngayThue">Ngày thuê</label><br>
+        <input type="date" name="dateNgayThue" id="ngayThue"><br>
+        <label for="ngayTra">Ngày trả</label><br>
+        <input type="date" name="dateNgayTra" id="ngayTra"><br>
+        <label for="dichvu">Dịch vụ đi kèm</label><br>
+        <input type="checkbox" name="chkAnsang" value="ansang" id="ansang">Ăn sáng
+        <br>
+        <input type="checkbox" name="chkGiatui" value="giatui" id="giatui">Giặt ủi
+        <br>
+        <input type="checkbox" name="chkBaobuoisang" value="baobuoisang" id="baobuoisang">Báo buổi sáng
+        <br>
+        <label for="tienthuephong">Tiền thuê phòng</label><br>
+        <input type="text" name="txtTienthuephong" id="tienthuephong"><br>
+        <input type="button" name="btnTinhdongia" value="Tính đơn giá" onclick="tinhdongia()">
+        <input type="submit" name="subDangky" value="Đăng ký">
+    </form>
+</body>
+
+</html>

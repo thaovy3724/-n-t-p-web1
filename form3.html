@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Phiếu thông tin cá nhân</h1>
+    <form action="#">
+    <label for="ten">Tên</label>
+    <input type="text" id="ten" name="ten"><br>
+    <label for="tuoi">Tuổi</label>
+    <input type="text" id="tuoi" name="tuoi"><br>
+    <label for="diachi">Địa chỉ</label>
+    <input type="text" id="diachi" name="diachi"><br>
+    <label for="gioitinh">Giới tính</label>
+    <!--chon (1,1)-->
+    <input type="radio" id="nam" name="gioitinh" value="nam" checked>nam
+    <input type="radio" id="nu" name="gioitinh" value="nu">nữ<br>
+    <!--chon (0,n)-->
+    <label>Ngôn ngữ</label>
+    <input type="checkbox" id="java" name="ngonngu" value="java">java
+    <input type="checkbox" id="java script" name="ngonngu" value="java script">java script 
+    <input type="checkbox" id="python" name="ngonngu" value="python">python
+    <!--
+        cach 1:
+    <input type="submit" value="submit">
+    <input type="reset" value="reset">
+-->
+    <!-- cach 2: -->
+    <br>
+    <input type="button" value="submit" onclick="send()">
+    <input type="button" value="reset" onclick="resetForm()">
+</form>
+    <script>
+        //kiem tra dien du het thong tin : ktra 3 input dau, k ktra gtinh vi auto checked
+        /*
+        var ten = document.getElementById("ten");
+        var tuoi = document.getElementById("tuoi");
+        var diachi = document.getElementById("tuoi");
+        */
+        //neu de k cho id thi dung tag
+        function send(){
+        var input = document.getElementsByTagName("input");
+        var ten = input[0].value; // k co value la sai
+        var tuoi = input[1].value;
+        var diachi = input[2].value;
+        var gioitinh="";
+        
+        if(input[3].value=="nam") gioitinh="nam";
+        else gioitinh="nu";
+
+        if(ten==""|| tuoi==""|| diachi==""){
+            alert("hãy điền đủ thông tin");
+            return;
+        }
+
+        if(tuoi!="" && isNaN(tuoi)){
+            alert("vui lòng nhập số");
+            return;
+        }
+
+        //kiem tra chon it nhat 1 ngon ngu
+        //cach 1
+        /*
+        if(!input[5].checked && !input[6].checked && !input[7].checked){
+            alert("chọn ít nhất 1 ngôn ngữ");
+            return;
+        }*/
+        //cach 2
+        //if(input[5].checked==false && input[6].checked==false && input[7].checked==false) ... 
+
+        //cach 3
+        var fav="";
+        for(var i=5; i<=7; i++)
+            if(input[i].checked)
+                fav = fav+input[i].value+" ";
+        if(fav=="") {
+            alert("chọn ít nhất 1 ngôn ngữ");
+            return;
+        }
+
+        //confirm form
+        var choice = confirm("confirm your infomation\n"+ten+"\n"+tuoi+"\n"+diachi+"\n"+gioitinh+"\n"+fav);
+        if(choice==true)
+            alert("đã gửi thành công")
+        }
+
+        function resetForm(){
+            document.getElementsByTagName("form")[0].reset(); //ham reset()
+        }
+    </script>
+
+</body>
+</html>

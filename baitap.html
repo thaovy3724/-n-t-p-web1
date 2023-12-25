@@ -1,0 +1,38 @@
+//nhap danh dau sao
+kiemtra(){
+    if(document.form1.txtTenDangNhap.value == '' || document.form1.txtDiaChi.value == ''){
+        alert('vui long nhap cac o danh dau sao');
+        return false;
+    }
+    //mat khau co 6 ki tu
+    if(document.form1.txtMatKhau.length < 6)
+        return false;
+    //mk moi trung voi mk cu
+    if(document.form1.txtMatKhau.value != document.form1.txtMatKhauNhapLai.value)
+        return false;
+}
+
+//chon cau hoi moi duoc tra loi
+cauhoi(){
+    if(document.form1.cauhoi.value == '-1'){
+        document.form1.traloi.disabled = true;
+        document.form1.traloi.value = '';
+    }
+    else{
+        document.form1.traloi.disabled = false;
+    }
+
+    if(document.form1.cauhoi.value != '-1' && document.form1.traloi.value = '')
+        return false;
+}
+
+//chon it nhat 1 so thich
+    if(document.form1.cauhoi.checked == true)
+<form name="form1" onsubmit="return kiemtra()"></form>
+<input type="text" name="txtTenDangNhap"> hoac <input type="text" name="txtTenDangNhap" required>
+<select name="cau hoi" id="">
+    <option value="-1">chon cau hoi</option>
+</select>
+<input type="text" name="cautraloi" disabled>
+<input type="number" maxlength="4"> //nhap nam co toi da 4 so
+<input type="radio" onchange="cauF();">

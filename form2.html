@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function kiemtra(){
+        var hoten = document.getElementById("hoten");
+        var cmnd = document.getElementById("cmnd");
+
+        if(hoten.value==""){
+            alert("Họ tên không được rỗng");
+            hoten.focus();
+            return false;
+        }
+
+        if(cmnd.value==""){
+            alert("CMND không được rỗng");
+            cmnd.focus();
+            return false;
+        }
+
+        if(isNaN(cmnd.value)){
+            alert("CMND phải là số");
+            cmnd.focus();
+            return false;
+        }
+        return true;
+    }
+
+    function dinhkem(){
+        var value = document.getElementById("mucgia").value;
+        if(value!="a"){
+            document.getElementById("ansang").checked=true;
+        }
+    }
+
+    function tinhdongia(){
+        var ngaythue = document.getElementById("ngaythue").value;
+        var ngaytra = document.getElementById("ngaytra").value;
+        var day1 = new Date(ngaythue);
+        var day2 = new Date(ngaytra);
+        var songay;
+        if(!ngaythue || !ngaytra || ngaythue==ngaytra)
+            songay=1;
+        else if(ngaythue>ngaytra){
+            alert("Ngày trả phải sau ngày thuê");
+        }
+        else{
+            var time = Math.abs(day1-day2);
+            songay = Math.ceil(time/(1000*60*60*24));
+        }
+        var mucgia = document.getElementById("mucgia").value;
+        var giaphong;
+        if(mucgia=="a") giaphong=150000;
+        else if(mucgia=="b") giaphong=300000;
+        else giaphong=500000;
+        var count = 0;
+        var ansang = document.getElementById("ansang");
+        var giatui = document.getElementById("giatui");
+        var baobuoisang = document.getElementById("baobuoisang");
+        if(ansang.checked && mucgia=="a") count++;
+        if(giatui.checked) count++;
+        if(baobuoisang.checked) count++;
+        var dongia1ngay = giaphong+giaphong*count*5/100;
+        document.getElementById("tienthuephong").value=dongia1ngay*songay;
+    }
+</script>
+<body>
+    <p>Phiếu đặt phòng</p>
+    <hr>
+    <form action="#" name="frmPhieudatphong" onsubmit="return kiemtra()">
+        <label for="hoten">Họ tên *</label><br>
+        <input type="text" id="hoten" name="txtHoten"><br>
+        <label for="diachi">Địa chỉ</label><br>
+        <input type="text" id="diachi" name="txtDiachi"><br><br>
+        <label for="cmnd">Số chứng minh nhân dân</label><br>
+        <input type="text" id="cmnd" name="txtcmnd"><br>
+        <label for="mucgia">Mức giá</label>
+        <select name="cboMucgia" id="mucgia" onchange="dinhkem()">
+            <option value="a" selected>loại thường</option>
+            <option value="b">loại sang trọng</option>
+            <option value="c">loại đặc biệt</option>
+        </select><br>
+        <label for="ngaythue">Ngày thuê</label><br>
+        <input type="date" id="ngaythue" name="dateNgaythue"><br>
+        <label for="ngaytra">Ngày trả</label><br>
+        <input type="date" id="ngaytra" name="dateNgaytra"><br>
+        <label for="dichvu">Dịch vụ đi kèm</label>
+        <input type="checkbox" id="ansang" name="chkAnsang" value="ansang">
+        <label for="ansang">Ăn sáng</label><br>
+        <input type="checkbox" id="giatui" name="chkGiatui" value="giatui">
+        <label for="giatui">Giặt ủi</label><br>
+        <input type="checkbox" id="baobuoisang" name="chkBaobuoisang" value="baobuoisang">
+        <label for="baobuoisang">Báo buổi sáng</label><br>
+        <label for="tienthuephong">Tiền thuê phòng</label><br>
+        <input type="text" id="tienthuephong" name="txtTienthuephong"><br>
+        <input type="button" name="btnTinhdongia" value="Tính đơn giá" onclick="tinhdongia()">
+        <input type="submit" name="subDangky" value="Đăng ký">
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.title{
+    font-size: 16px;
+    margin: auto;
+    background-color: gray;
+}
+
+table{
+    border: 1px solid red;
+    text-align: center;
+}
+
+th, td{
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.stt{
+    text-align: left;
+}
